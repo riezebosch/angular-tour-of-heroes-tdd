@@ -23,7 +23,13 @@ describe('HeroesComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('should list all heroes', () => {
+    const element: HTMLElement = fixture.nativeElement;
+    expect(element.querySelectorAll("li").length).toBe(10);
+  });
+
+  it('should display details', () => {
+    const element: HTMLElement = fixture.nativeElement;
+    expect(element.querySelector("li")!.textContent).toBe('11 Dr Nice');
   });
 });
