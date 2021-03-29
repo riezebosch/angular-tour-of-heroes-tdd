@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, fakeAsync, flush } from '@angular/core/testing';
 
 import { HeroesComponent } from './heroes.component';
 
@@ -32,4 +32,21 @@ describe('HeroesComponent', () => {
     const element: HTMLElement = fixture.nativeElement;
     expect(element.querySelector("li")!.textContent).toBe('11 Dr Nice');
   });
+
+  it('should not show selected hero when nothing is selected', () => {
+    const element: HTMLElement = fixture.nativeElement;
+    element.querySelector("li")!.click
+
+    expect(element.querySelector("#selected")).toBeNull();
+  });
+
+  it('should show selected hero after click', fakeAsync(() => {
+    const element: HTMLElement = fixture.nativeElement;
+    element.querySelector("li")!.click()
+
+    flush();
+    fixture.detectChanges();
+
+    expect(element.querySelector("#selected")?.textContent).toBe('DR NICE');
+  }));
 });
